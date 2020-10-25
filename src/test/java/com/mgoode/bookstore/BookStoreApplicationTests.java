@@ -27,7 +27,7 @@ class BookStoreApplicationTests {
 	public void findByISBN() {
 
 		Book book = new Book();
-		book.setISBN("123456789");
+		book.setISBN("1234567890");
 
 		entityManager.persist(book);
 		entityManager.flush();
