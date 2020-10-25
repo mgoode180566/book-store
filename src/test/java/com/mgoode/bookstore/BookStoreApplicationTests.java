@@ -39,6 +39,11 @@ class BookStoreApplicationTests {
 	}
 
 	@Test
+	public void test() {
+		assertEquals(9,9);
+	}
+
+	@Test
 	void contextLoads() {
 	}
 
