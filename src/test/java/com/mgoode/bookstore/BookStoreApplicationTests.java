@@ -13,6 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@DataJpaTest
 class BookStoreApplicationTests {
 
 	@Autowired
