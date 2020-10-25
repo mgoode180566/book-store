@@ -2,6 +2,7 @@ package com.mgoode.bookstore.model;
 
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
 
 @Entity
 public class AntiqueBook extends Book {
@@ -24,12 +25,9 @@ public class AntiqueBook extends Book {
     }
 
     public double calculatePrice( int qty ) {
-        // check this
-        return qty * price * (2020 - releaseYear) / 10;
-
-
-
-        //return 1000.00;
+        int currentYear = LocalDate.now().getYear();
+        //     Total price = Quantity * Price * (Current Year – Release Year) / 10.
+        return (qty * price * (currentYear - releaseYear)) / 10;
     }
 
     @Override

@@ -23,7 +23,8 @@ public class ScienceJournal extends Book {
     }
 
     public double calculatePrice( int qty ) {
-        return qty * price;
+        // Total Price = Quantity * Price * Science Index
+        return qty * price * scienceIndex;
     }
 
 }
