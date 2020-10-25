@@ -11,7 +11,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
+// this is the main controller
+
 @RestController
+@CrossOrigin(origins = { "http://localhost:3001", "http://localhost:4200" })
 public class BookController {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
@@ -34,10 +37,13 @@ public class BookController {
     }
 
     @GetMapping("/books/getbookbyid")
-    public Book getBookById(@RequestParam long id) {
+    public ResponseEntity<Object> getBookById(@RequestParam long id) {
         log.info("Get book by id " + id);
         Optional<Book> book = bookService.getBookById(id);
-        return book.get();
+        if (!book.isPresent()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.accepted().body(book.get());
     }
 
     @GetMapping("/books/getbookbyisbn")
@@ -68,7 +74,7 @@ public class BookController {
     }
 
     @GetMapping("books/getprice")
-    public ResponseEntity getPrice( @RequestParam String ISBN, @RequestParam int qty ) {
+    public ResponseEntity<Object> getPrice( @RequestParam String ISBN, @RequestParam int qty ) {
         Optional<Book> book = bookService.getBookByBarcode(ISBN);
         if (!book.isPresent()) {
             return ResponseEntity.notFound().build();
