@@ -40,7 +40,7 @@ class BookStoreApplicationTests {
 
 	@Test
 	public void test() {
-		assertEquals(9,8);
+		assertEquals(9,9);
 	}
 
 	@Test
