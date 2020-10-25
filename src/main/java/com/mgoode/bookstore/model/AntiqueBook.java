@@ -24,7 +24,7 @@ public class AntiqueBook extends Book {
     }
 
     public double calculatePrice( int qty ) {
-
+        // check this
         return qty * price * (2020 - releaseYear) / 10;
 
 
