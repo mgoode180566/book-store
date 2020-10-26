@@ -28,7 +28,7 @@ public class BookController {
         return "home";
     }
 
-    @GetMapping("/books/all")
+    @GetMapping("/books/alls ")
     public Iterable<Book> getAllBooks() {
         log.info("Get all books");
         return bookService.getAllBooks();
