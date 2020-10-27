@@ -27,7 +27,7 @@ public class BookController {
 
     @GetMapping("/")
     public String getHome() {
-        return "home";
+        return "home : docker";
     }
 
     @GetMapping("/books/alls ")
