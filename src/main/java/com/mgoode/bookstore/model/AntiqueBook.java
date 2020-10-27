@@ -1,16 +1,19 @@
 package com.mgoode.bookstore.model;
 
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
+@JsonTypeName("antiquebook")
 public class AntiqueBook extends Book {
 
     int releaseYear;
 
-    public AntiqueBook(String barcode, String title, String author, double price, int releaseYear) {
-        super(barcode, title, author, price);
+    public AntiqueBook( String barcode, String title, String author, double price, int releaseYear) {
+        super( barcode, title, author, price);
         this.releaseYear = releaseYear;
     }
 
@@ -33,9 +36,10 @@ public class AntiqueBook extends Book {
     @Override
     public String toString() {
         return "AntiqueBook{" +
-                "id=" + id +
-                ", releaseYear=" + releaseYear +
-                ", barcode='" + ISBN + '\'' +
+                "releaseYear=" + releaseYear +
+                ", id=" + id +
+                //", type='" + type + '\'' +
+                ", ISBN='" + ISBN + '\'' +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +

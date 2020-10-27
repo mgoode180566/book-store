@@ -50,13 +50,7 @@ class BookStoreApplicationTests {
 		assertEquals(26239.8, total);
 	}
 
-//	@Test
-//	public void calculateJournalPrice() {
-//		ScienceJournal book = new ScienceJournal();
-//		book.setPrice(12.99);
-//		double total = book.calculatePrice(10);
-//		assertEquals(26239.8, total);
-//	}
+
 
 
 

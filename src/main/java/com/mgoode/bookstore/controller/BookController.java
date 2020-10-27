@@ -4,17 +4,12 @@ import com.mgoode.bookstore.model.Book;
 import com.mgoode.bookstore.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 import java.util.Optional;
 
-// comment
-
 @RestController
-@CrossOrigin(origins = { "http://localhost:3001", "http://localhost:4200" })
 public class BookController {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
@@ -25,12 +20,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/")
-    public String getHome() {
-        return "home : docker";
-    }
-
-    @GetMapping("/books/alls ")
+    @GetMapping("/books/all")
     public Iterable<Book> getAllBooks() {
         log.info("Get all books");
         return bookService.getAllBooks();
@@ -41,7 +31,7 @@ public class BookController {
         log.info("Get book by id " + id);
         Optional<Book> book = bookService.getBookById(id);
         if (!book.isPresent()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.accepted().body(book.get());
     }
@@ -51,25 +41,34 @@ public class BookController {
         log.info("Get book with barcode " + isbn);
         Optional<Book> book = bookService.getBookByBarcode(isbn);
         if (!book.isPresent()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.accepted().body(book.get());
     }
 
-    @PostMapping("/books/")
+    @RequestMapping(value="/books/add",method = RequestMethod.POST)
     public ResponseEntity<Object> addBook(@RequestBody Book book) {
-        bookService.saveBook(book);
+        try {
+            bookService.saveBook(book);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
+        }
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/books/{id}")
-    public ResponseEntity<Object> updateBook(@RequestBody Book book, @PathVariable long id) {
-        Optional<Book> b = bookService.getBookById(id);
+    @RequestMapping(value="/books/update",method=RequestMethod.PUT)
+    public ResponseEntity<Object> updateBook(@RequestParam String ISBN, @RequestBody Book book) {
+        log.info(ISBN);
+        Optional<Book> b = bookService.getBookByBarcode(ISBN);
         if (!b.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        book.setId(id);
-        bookService.saveBook(book);
+        book.setId(b.get().getId());
+        try {
+            bookService.saveBook(book);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
+        }
         return ResponseEntity.noContent().build();
     }
 
