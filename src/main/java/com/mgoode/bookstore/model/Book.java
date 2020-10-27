@@ -28,7 +28,6 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-//    String type;
     String ISBN;
     String title;
     String author;
@@ -39,8 +38,7 @@ public class Book {
         return qty * price;
     }
 
-    public Book(/*String type,*/ String isbn, String title, String author, double price) {
-//        this.type = type;
+    public Book(String isbn, String title, String author, double price) {
         this.ISBN = isbn;
         this.title = title;
         this.author = author;
@@ -56,14 +54,6 @@ public class Book {
     public void setId(long id) {
         this.id = id;
     }
-
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
 
     public String getISBN() {
         return ISBN;

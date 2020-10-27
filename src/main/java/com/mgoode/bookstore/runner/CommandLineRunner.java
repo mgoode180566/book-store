@@ -20,21 +20,20 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     @Override
     public void run(String... args) throws Exception {
 
-        log.info("Add a book");
         bookService.saveBook(new Book("9781409521372","BFG","Roald Dahl",10.99));
         bookService.saveBook(new Book("9781503121379","Lord of the Rings","J.R.R. Tolkien",12.99));
         bookService.saveBook(new AntiqueBook("9781408921684","Wuthering Heights","Emily Bronte",12.99, 1850));
         bookService.saveBook(new ScienceJournal("9781111121389","Chronobiology International","Dr. Alain Reinberg",12.99, 1));
 
-        Iterable<Book> books = bookService.getAllBooks();
-
-        for (Book book : books) {
-
-            System.out.println(book.toString());
-
-            System.out.println(book.calculatePrice(10));
-
-        }
+//        Iterable<Book> books = bookService.getAllBooks();
+//
+//        for (Book book : books) {
+//
+//            System.out.println(book.toString());
+//
+//            System.out.println(book.calculatePrice(10));
+//
+//        }
 
     }
 }

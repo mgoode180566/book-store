@@ -53,13 +53,12 @@ public class BookController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @RequestMapping(value="/books/update",method=RequestMethod.PUT)
-    public ResponseEntity<Object> updateBook(@RequestParam String ISBN, @RequestBody Book book) {
-        log.info(ISBN);
-        Optional<Book> b = bookService.getBookByBarcode(ISBN);
+    public ResponseEntity<Object> updateBook(@RequestParam String isbn, @RequestBody Book book) {
+        Optional<Book> b = bookService.getBookByBarcode(isbn);
         if (!b.isPresent()) {
             return ResponseEntity.notFound().build();
         }
@@ -69,12 +68,12 @@ public class BookController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("books/getprice")
-    public ResponseEntity<Object> getPrice( @RequestParam String ISBN, @RequestParam int qty ) {
-        Optional<Book> book = bookService.getBookByBarcode(ISBN);
+    public ResponseEntity<Object> getPrice( @RequestParam String isbn, @RequestParam int qty ) {
+        Optional<Book> book = bookService.getBookByBarcode(isbn);
         if (!book.isPresent()) {
             return ResponseEntity.notFound().build();
         }

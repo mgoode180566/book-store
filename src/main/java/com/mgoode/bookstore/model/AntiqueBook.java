@@ -29,7 +29,7 @@ public class AntiqueBook extends Book {
 
     public double calculatePrice( int qty ) {
         int currentYear = LocalDate.now().getYear();
-        //     Total price = Quantity * Price * (Current Year – Release Year) / 10.
+        // Total price = Quantity * Price * (Current Year – Release Year) / 10.
         return (qty * price * (currentYear - releaseYear)) / 10;
     }
 

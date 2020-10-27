@@ -50,10 +50,6 @@ class BookStoreApplicationTests {
 		assertEquals(26239.8, total);
 	}
 
-
-
-
-
 	@Test
 	void contextLoads() {
 	}
