@@ -26,7 +26,7 @@ public class BookController {
         return "At home";
     }
 
-    @GetMapping("/echo")
+    @GetMapping("/echo2")
     public String echo( @RequestParam String s ) {
         return s;
     }
