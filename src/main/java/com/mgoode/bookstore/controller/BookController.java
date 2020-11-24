@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class BookController {
 
@@ -19,6 +20,17 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "At home";
+    }
+
+    @GetMapping("/echo")
+    public String echo( @RequestParam String s ) {
+        return s;
+    }
+
 
     @GetMapping("/books/all")
     public Iterable<Book> getAllBooks() {
